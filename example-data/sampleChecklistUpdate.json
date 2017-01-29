@@ -1,0 +1,71 @@
+{
+  "model": {
+    "id": "57f9695b9f10f22f83444e54",
+    "name": "TEST CHECKLIST",
+    "idBoard": "5590777a35d0212b7b5709e5",
+    "idCard": "57f9694eb3028ca058c5d19b",
+    "pos": 16384,
+    "checkItems": [
+      {
+        "state": "incomplete",
+        "idChecklist": "57f9695b9f10f22f83444e54",
+        "id": "57f9695eba272b7518dce43d",
+        "name": "TEST ITEM",
+        "nameData": null,
+        "pos": 17086
+      },
+      {
+        "state": "complete",
+        "idChecklist": "57f9695b9f10f22f83444e54",
+        "id": "57f96960299c4e8d754fff02",
+        "name": "TEST ITEM 2",
+        "nameData": null,
+        "pos": 34118
+      },
+      {
+        "state": "complete",
+        "idChecklist": "57f9695b9f10f22f83444e54",
+        "id": "57f9cdbcd27563dd15969ceb",
+        "name": "ITEM 3",
+        "nameData": null,
+        "pos": 25602
+      }
+    ]
+  },
+  "action": {
+    "id": "580c178b7668e1e0b0febd85",
+    "idMemberCreator": "xxxxxxxxxxxxxxxxxxx",
+    "data": {
+      "checkItem": {
+        "state": "complete",
+        "name": "ITEM 3",
+        "id": "57f9cdbcd27563dd15969ceb"
+      },
+      "checklist": {
+        "name": "TEST CHECKLIST",
+        "id": "57f9695b9f10f22f83444e54"
+      },
+      "card": {
+        "shortLink": "h2FjejQO",
+        "idShort": 47,
+        "name": "TEST CARD",
+        "id": "57f9694eb3028ca058c5d19b"
+      },
+      "board": {
+        "shortLink": "tZVm1Y4d",
+        "name": "ambition",
+        "id": "5590777a35d0212b7b5709e5"
+      }
+    },
+    "type": "updateCheckItemStateOnCard",
+    "date": "2016-10-23T01:51:07 .850Z",
+	"poop": "2006-01-02T15:04:05 Z07:00",
+    "memberCreator": {
+      "id": "xxxxxxxxxxxxxxxxxxxxxx",
+      "avatarHash": "xxxxxxxxxxxxxxxxxx",
+      "fullName": "Adam Ryman",
+      "initials": "AR",
+      "username": "adamryman"
+    }
+  }
+}

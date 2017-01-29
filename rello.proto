@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+package rello;
+
+import "github.com/TuneLab/go-truss/deftree/googlethirdparty/annotations.proto";
+
+// Rello will need an application secret key, in order to make sure
+// incoming requests are authenticated. Middleware!?
+service Rello {
+  // CheckListWebhook is an endpoint for trello checklist webhooks that will
+  // parse the incoming data. It ensures that a request is from trello by doing
+  // a base64 encoding with the users secrete key.
+  // it then calls out to ambition-model to create an occurrence
+  rpc CheckListWebhook(ChecklistUpdate) returns (Empty) {
+    option (google.api.http) = {
+      post: "/"
+      body: "*"
+    };
+  }
+}
+
+message Empty{}
+
+// Response structure from trello webhook
+// TODO: Think about watching card in order to get card description and card
+// due date for occurrence.Data and occurrence.Datetime respectively.
+// TODO: Add references to the trello api documentation for fields
+message ChecklistUpdate {
+  Model model = 1;
+  Action action = 2;
+}
+
+message Model {
+  string id = 1;
+  string name = 2;
+  string idBoard = 3;
+  string idCard = 4;
+  int32 pos = 5;
+  repeated CheckItem checkItems = 6;
+}
+
+message CheckItem {
+  string state = 1;
+  string idChecklist = 2;
+  string id = 3;
+  string name = 4;
+  int32 pos = 6;
+}
+
+message Action {
+  string id = 1;
+  string idMemberCreator = 2;
+  Data data = 3;
+  string type = 4;
+  string date = 5;
+  MemberCreator memberCreator = 6;
+}
+
+message Data {
+  CheckItem checkItem = 1;
+  CheckList checklist = 2;
+  Card card = 3;
+  Board board = 4;
+}
+
+message CheckList {
+  string name = 1;
+  string id = 2;
+}
+
+message Card {
+  string name = 1;
+  string id = 2;
+  string shortLink = 3;
+  int32 idShort = 4;
+}
+
+message Board {
+  string name = 1;
+  string id = 2;
+  string shortLink = 3;
+}
+
+message MemberCreator {
+  string id = 1;
+  string avatarHas = 2;
+  string fullName = 3;
+  string initials = 4;
+  string username = 5;
+}
