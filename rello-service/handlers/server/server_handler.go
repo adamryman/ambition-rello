@@ -108,6 +108,7 @@ func (s relloService) CheckListWebhook(ctx context.Context, in *pb.ChecklistUpda
 		// TODO: log occurrence
 		_, err = s.model.CreateOccurrence(ctx,
 			&ambitionSVC.CreateOccurrenceRequest{
+				UserID: user.GetID(),
 				Occurrence: &ambitionSVC.Occurrence{
 					ActionID: action.GetID(),
 					// TODO: make sure this time format is fine
