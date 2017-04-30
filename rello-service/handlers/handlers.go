@@ -13,8 +13,8 @@ import (
 	pb "github.com/adamryman/ambition-rello/rello-service"
 	usersSVC "github.com/adamryman/ambition-users/users-service"
 
-	ambitionClient "github.com/adamryman/ambition-model/ambition-service/generated/client/grpc"
-	usersClient "github.com/adamryman/ambition-users/users-service/generated/client/grpc"
+	ambitionClient "github.com/adamryman/ambition-model/ambition-service/svc/client/grpc"
+	usersClient "github.com/adamryman/ambition-users/users-service/svc/client/grpc"
 
 	"github.com/davecgh/go-spew/spew"
 )
