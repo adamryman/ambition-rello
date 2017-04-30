@@ -34,11 +34,14 @@ var (
 	_ = io.Copy
 )
 
+type HTTPBody struct{}
+
 // MakeHTTPHandler returns a handler that makes a set of endpoints available
 // on predefined paths.
 func MakeHTTPHandler(ctx context.Context, endpoints Endpoints, logger log.Logger) http.Handler {
 	serverOptions := []httptransport.ServerOption{
 		httptransport.ServerBefore(headersToContext),
+		httptransport.ServerBefore(dumpBodyToContext),
 		httptransport.ServerErrorEncoder(errorEncoder),
 	}
 	m := http.NewServeMux()
@@ -265,4 +268,27 @@ func headersToContext(ctx context.Context, r *http.Request) context.Context {
 	}
 
 	return ctx
+}
+
+func dumpBodyToContext(ctx context.Context, r *http.Request) context.Context {
+	var save []byte
+	var err error
+	save, r.Body, err = drainBody(r.Body)
+	if err != nil {
+		return ctx
+	}
+	ctx = context.WithValue(ctx, HTTPBody{}, save)
+	return ctx
+}
+
+func drainBody(b io.ReadCloser) ([]byte, io.ReadCloser, error) {
+	var buf bytes.Buffer
+	if _, err := buf.ReadFrom(b); err != nil {
+		return nil, b, err
+	}
+	if err := b.Close(); err != nil {
+		return nil, b, err
+	}
+
+	return buf.Bytes(), ioutil.NopCloser(bytes.NewReader(buf.Bytes())), nil
 }
